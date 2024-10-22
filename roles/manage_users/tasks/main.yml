@@ -1,0 +1,12 @@
+---
+# tasks file for roles/manage_users
+
+# Incluir tareas de creación de usuarios
+- name: Tarea de Creacion de usuarios
+  ansible.builtin.include_tasks: create.yml
+  when: user_action == 'create'
+
+# Incluir tareas de eliminación de usuarios
+- name: Tarea de Eliminación de usuarios
+  ansible.builtin.include_tasks: delete.yml
+  when: user_action == 'delete'

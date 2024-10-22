@@ -1,0 +1,7 @@
+---
+- name: Gestión de usuarios en servidores Unix/Linux
+  hosts: all # Dinámico para ejecutar en diferentes grupos
+  become: true
+
+  roles:
+    - manage_users

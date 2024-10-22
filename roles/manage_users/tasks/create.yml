@@ -1,0 +1,23 @@
+---
+- name: Crear usuario en el sistema con contraseña predeterminada
+  ansible.builtin.user:
+    name: "{{ manage_users_name }}"
+    shell: "{{ manage_users_shell | default('/bin/bash') }}"
+    home: "{{ manage_users_home | default('/home/' + manage_users_name) }}"
+    password: "{{ manage_users_password | password_hash('sha512') }}" # Contraseña predeterminada
+    groups: "{{ manage_users_groups }}"
+    state: present
+
+- name: Crear el directorio home si no existe
+  ansible.builtin.file:
+    path: "{{ manage_users_home | default('/home/' + manage_users_name) }}"
+    state: directory
+    owner: "{{ manage_users_name }}"
+    group: "{{ manage_users_groups.split(',')[0] }}" # Asignar grupo principal
+    mode: "0755"
+
+# Obligamos a cambiar la contraseña en el primer login
+- name: Obligar al usuario a cambiar la contraseña al primer login
+  ansible.builtin.command:
+    cmd: "chage -d 0 {{ manage_users_name }}"
+  changed_when: true

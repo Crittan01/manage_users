@@ -1,0 +1,7 @@
+---
+# Variables predeterminadas
+manage_users_name: "nuevo_usuario"
+manage_users_password: "Password123"
+manage_users_shell: "/bin/bash"
+manage_users_home: "/home/{{ manage_users_name }}"
+manage_users_groups: "users"

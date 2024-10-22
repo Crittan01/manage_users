@@ -1,0 +1,9 @@
+[bd_servers]
+ubuntu24
+
+[mw_servers]
+centos8s
+
+[all_servers:children]
+bd_servers
+mw_servers

@@ -1,0 +1,6 @@
+---
+- name: Eliminar usuario en el sistema
+  ansible.builtin.user:
+    name: "{{ manage_users_name }}"
+    remove: true # Elimina el directorio home
+    state: absent
