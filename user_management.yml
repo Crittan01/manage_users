@@ -1,7 +1,10 @@
 ---
 - name: Gestión de usuarios en servidores Unix/Linux
-  hosts: all # Dinámico para ejecutar en diferentes grupos
+  hosts: linux_servers
   become: true
+  gather_facts: true
 
-  roles:
-    - manage_users
+  tasks:
+    - name: Rol Parcheo CENTOS
+      ansible.builtin.include_role:
+        name: manage_users
